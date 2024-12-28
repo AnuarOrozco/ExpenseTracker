@@ -26,4 +26,12 @@ public class ExpenseController {
         return "Dashboard";
     }
 
+    @GetMapping("/addExpense")
+    public String showAddExpenseView(Model model) {
+        Expense expense = new Expense();
+        model.addAttribute("expense", expense);
+
+        return "AddExpense";
+    }
+
 }
