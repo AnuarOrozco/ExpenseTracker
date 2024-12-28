@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker</title>
-    <link rel="stylesheet" href="/css/DashboardStyles.css">
+    <link rel="stylesheet" href="DashboardStyles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="http://localhost:35729/livereload.js"></script>
 </head>
@@ -16,14 +16,22 @@
     <table>
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Description</th>
-            <th>Amount</th>
-            <th>Actions</th>
+            <th th:text="'ID'">ID</th>
+            <th th:text="'Description'">Description</th>
+            <th th:text="'Amount'">Amount</th>
+            <th th:text="'Actions'">Actions</th>
         </tr>
         </thead>
         <tbody>
-
+        <tr th:each="expense : ${expenses}">
+            <td th:text="${expense.id}">1</td>
+            <td th:text="${expense.description}">Sample Description</td>
+            <td th:text="${expense.amount}">0.00</td>
+            <td>
+                <a th:href="@{/EditExpense/{id}(id=${expense.id})}">Edit</a>
+                <a th:href="@{/DeleteExpense/{id}(id=${expense.id})}">Delete</a>
+            </td>
+        </tr>
         </tbody>
     </table>
 
@@ -35,7 +43,7 @@
     </div>
 
     <div class="button-container">
-        <button class="add-expense" th:onclick="'location.href=\'/add-expense\''">Add Expense</button>
+        <button class="add-expense" th:onclick="'location.href=\'/AddExpense\''">Add Expense</button>
     </div>
 </div>
 
