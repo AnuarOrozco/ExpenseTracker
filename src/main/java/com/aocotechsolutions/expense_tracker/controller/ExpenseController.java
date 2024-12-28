@@ -44,11 +44,22 @@ public class ExpenseController {
     }
 
     @GetMapping("editExpense/{id}")
-    public String showUpdateExpenseView(@PathVariable Long id, Model model) {
+    public String showUpdateExpenseView(@PathVariable("id") Long id, Model model) {
         Expense expense = expenseService.getExpenseById(id);
         model.addAttribute("expense", expense);
 
         return "UpdateExpense";
+    }
+
+    @PostMapping("/updateExpense/{id}")
+    public String updateExpense(@PathVariable("id") Long id, @ModelAttribute("expense") Expense expense) {
+        Expense existingExpense = expenseService.getExpenseById(id);
+        existingExpense.setDescription(expense.getDescription());
+        existingExpense.setAmount(expense.getAmount());
+
+        expenseService.saveExpense(expense);
+
+        return "redirect:/";
     }
 
 }
