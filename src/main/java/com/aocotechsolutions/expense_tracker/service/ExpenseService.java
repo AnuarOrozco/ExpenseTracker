@@ -32,15 +32,15 @@ public class ExpenseService {
         expenseRepository.save(expense);
     }
 
-    public Expense updateExpense(Long id, Expense expense) {
-        if (!expenseRepository.existsById(id)) {
-            throw new RuntimeException("Expense not found with id: " + id);
-        }
-
-        expense.setId(id);
-
-        return expenseRepository.save(expense);
-    }
+//    public Expense updateExpense(Long id, Expense expense) {
+//        if (!expenseRepository.existsById(id)) {
+//            throw new RuntimeException("Expense not found with id: " + id);
+//        }
+//
+//        expense.setId(id);
+//
+//        return expenseRepository.save(expense);
+//    }
 
     public void deleteExpense(Long id) {
         Optional<Expense> expenseOptional = expenseRepository.findById(id);

@@ -10,13 +10,14 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Entity
 @Data @NoArgsConstructor @AllArgsConstructor
+@Entity
 public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String description;
     private BigDecimal amount;
 
