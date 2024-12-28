@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.math.BigDecimal;
@@ -40,6 +41,14 @@ public class ExpenseController {
     public String saveExpense(@ModelAttribute("expense") Expense expense, Model model) {
         expenseService.saveExpense(expense);
         return "redirect:/";
+    }
+
+    @GetMapping("editExpense/{id}")
+    public String showUpdateExpenseView(@PathVariable Long id, Model model) {
+        Expense expense = expenseService.getExpenseById(id);
+        model.addAttribute("expense", expense);
+
+        return "UpdateExpense";
     }
 
 }
