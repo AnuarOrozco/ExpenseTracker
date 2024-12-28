@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Expense</title>
+    <link rel="stylesheet" href="UpdateExpenseStyles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script> <!-- Animaciones -->
+</head>
+<body>
+<div class="container">
+    <h1>Update Expense</h1>
+    <h2>Developed by Anuar Orozco</h2>
+
+    <div class="messages">
+        <p th:if="${errorMessage}" class="error" th:text="${errorMessage}"></p>
+        <p th:if="${successMessage}" class="success" th:text="${successMessage}"></p>
+    </div>
+
+    <form th:action="@{/update-expense}" method="post">
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" placeholder="Enter updated description" required th:value="${expense.description}">
+        </div>
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" name="amount" placeholder="Enter updated amount" required th:value="${expense.amount}">
+        </div>
+        <button type="submit" class="update-button">Update</button>
+    </form>
+</div>
+
+<script>
+    gsap.from(".container", { duration: 1, opacity: 0, y: -50 });
+    gsap.from("form", { duration: 1, opacity: 0, delay: 0.5 });
+
+    function adjustContainerHeight() {
+        const container = document.querySelector(".container");
+        container.style.height = "auto"; // Ajusta la altura de acuerdo al contenido
+    }
+    window.onload = adjustContainerHeight;
+</script>
+</body>
+</html>

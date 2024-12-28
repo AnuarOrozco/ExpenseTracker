@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="DashboardStyles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script> <!-- Animaciones -->
+</head>
+<body>
+<div class="container">
+    <h1>Expense Tracker</h1>
+    <h2>Developed by Anuar Orozco</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <div class="total" th:text="'Total accumulated so far: $' + ${total}">Total accumulated so far: $0.00</div>
+
+    <div class="messages">
+        <p th:if="${errorMessage}" class="error" th:text="${errorMessage}"></p>
+        <p th:if="${successMessage}" class="success" th:text="${successMessage}"></p>
+    </div>
+
+    <div class="button-container">
+        <button class="add-expense" th:onclick="'location.href=\'/add-expense\''">Add Expense</button>
+    </div>
+</div>
+
+<script>
+    gsap.from(".container", { duration: 1, opacity: 0, y: -50 });
+    gsap.from("table", { duration: 1, opacity: 0, delay: 0.5 });
+    gsap.from(".add-expense", { duration: 1, scale: 0.8, opacity: 0, delay: 1 });
+
+    function adjustTableHeight() {
+        const table = document.querySelector("table");
+        const rows = table.querySelectorAll("tbody tr").length;
+        const container = document.querySelector(".container");
+        container.style.height = `${200 + rows * 50}px`; // Ajusta según las necesidades
+    }
+    window.onload = adjustTableHeight;
+</script>
+</body>
+</html>

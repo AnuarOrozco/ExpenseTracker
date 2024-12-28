@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expense</title>
+    <link rel="stylesheet" href="AddExpenseStyles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script> <!-- Animaciones -->
+</head>
+<body>
+<div class="container">
+    <h1>Add Expense</h1>
+    <h2>Developed by Anuar Orozco</h2>
+
+    <div class="messages">
+        <p th:if="${errorMessage}" class="error" th:text="${errorMessage}"></p>
+        <p th:if="${successMessage}" class="success" th:text="${successMessage}"></p>
+    </div>
+    <form th:action="@{/add-expense}" method="post">
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" placeholder="Enter description" required>
+        </div>
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
+        </div>
+        <button type="submit" class="save-button">Save</button>
+    </form>
+</div>
+
+<script>
+    gsap.from(".container", { duration: 1, opacity: 0, y: -50 });
+    gsap.from("form", { duration: 1, opacity: 0, delay: 0.5 });
+    gsap.from(".save-button", { duration: 1, scale: 0.8, opacity: 0, delay: 1 });
+
+    const messages = document.querySelectorAll('.messages p');
+    messages.forEach(msg => {
+        gsap.from(msg, { duration: 0.5, opacity: 0, x: -50 });
+    });
+</script>
+</body>
+</html>
